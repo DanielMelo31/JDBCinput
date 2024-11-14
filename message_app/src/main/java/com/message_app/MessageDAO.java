@@ -1,4 +1,4 @@
-package com;
+package com.message_app;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -74,7 +74,16 @@ public class MessageDAO {
     }
 
     public static void deleteMessage(int id) {
-
+        String sql = "Delete from message where id_messages=" + id;
+        try (
+            PreparedStatement myStatement = getConnection().prepareStatement(sql)
+    ){
+        myStatement.executeUpdate();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error deleting an user");
+        }
     }
 
     public static Message createMessage(ResultSet resultSet) throws SQLException {

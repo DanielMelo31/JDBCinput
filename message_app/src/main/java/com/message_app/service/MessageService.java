@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.MessageDAO;
+import com.message_app.MessageDAO;
 import com.message_app.model.Message;
 
 
@@ -52,5 +52,15 @@ public class MessageService {
         
         messageDAO = new MessageDAO();
         messageDAO.updateMessage(messageID, message);
+    }
+
+    public void deleteMessage(){
+        scanner = new  Scanner(System.in);
+
+        System.out.println("Enter the message ID...");
+        int messageID = scanner.nextInt();
+
+        messageDAO = new MessageDAO();
+        messageDAO.deleteMessage(messageID);
     }
 }

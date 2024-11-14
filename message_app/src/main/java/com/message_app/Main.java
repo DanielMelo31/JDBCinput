@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.MessageDAO;
 import com.message_app.service.MessageService;
 
 public class Main {
@@ -50,6 +49,10 @@ public class Main {
                 case 3:
 
                     messageService.updateMessage();
+                    break;
+                case 4:
+
+                    messageService.deleteMessage();
                     break;
                 default:
                     throw new AssertionError();
