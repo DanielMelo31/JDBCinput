@@ -56,8 +56,21 @@ public class MessageDAO {
         return messages;
     }
 
-    public static void updateMessage(int id) {
+    public static void updateMessage(int id, Message message) {
+        String sql = "Update message set message=?, author=? where id_messages="+id;
+        try (
+            PreparedStatement myStatement = getConnection().prepareStatement(sql);
+        ){
+            myStatement.setString(1, message.getMessage());
+            myStatement.setString(2, message.getAuthor());
+            
 
+            myStatement.executeUpdate();
+            
+        } catch (Exception e) {
+            e.getStackTrace();
+            System.out.println("Error updating a message");
+        }
     }
 
     public static void deleteMessage(int id) {

@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) throws SQLException, IOException {
         Scanner scanner = new Scanner(System.in);
         MessageService messageService = new MessageService();
+        MessageDAO messageDAO = new MessageDAO();
 
         // try 
         // (    
@@ -43,10 +44,13 @@ public class Main {
                     messageService.createMessage();
                     break;
                 case 2:
-                    MessageDAO messageDAO = new MessageDAO();
-
+    
                     messageDAO.readMessage().forEach(System.out::println);
                 break;
+                case 3:
+
+                    messageService.updateMessage();
+                    break;
                 default:
                     throw new AssertionError();
             }

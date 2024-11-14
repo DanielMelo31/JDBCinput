@@ -31,4 +31,26 @@ public class MessageService {
 
         messageDAO.createMessage(message);
     }
+
+    public void updateMessage() {
+        scanner = new  Scanner(System.in);
+
+        
+        System.out.println("Enter your message...");
+        String messageContent = scanner.nextLine();
+        
+        System.out.println("Enter your name...");
+        String author = scanner.nextLine();
+
+        System.out.println("Enter the message ID...");
+        int messageID = scanner.nextInt();
+
+        message = new Message();
+        message.setId_messages(messageID);
+        message.setMessage(messageContent);
+        message.setAuthor(author);
+        
+        messageDAO = new MessageDAO();
+        messageDAO.updateMessage(messageID, message);
+    }
 }
