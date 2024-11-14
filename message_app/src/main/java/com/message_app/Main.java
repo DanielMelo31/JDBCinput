@@ -1,27 +1,58 @@
 package com.message_app;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Scanner;
 
-import com.message_app.utils.DBConnector;
+import com.MessageDAO;
+import com.message_app.service.MessageService;
 
 public class Main {
-    public static void main(String[] args) {
-        DBConnector connector = new DBConnector();
+    public static void main(String[] args) throws SQLException, IOException {
+        Scanner scanner = new Scanner(System.in);
+        MessageService messageService = new MessageService();
 
-        try 
-        (
-            Connection myConnection = connector.getConnection();
-            Statement myStatement = myConnection.createStatement();
-            ResultSet myResultSet = myStatement.executeQuery("Select * from message")
-            ){
-                while (myResultSet.next()) {
-                    System.out.println(myResultSet.getString("author"));
-                }
+        // try 
+        // (    
+        //     Connection myConnection = connector.getInstance();
+        //     Statement myStatement = myConnection.createStatement();
+        //     ResultSet myResultSet = myStatement.executeQuery("Select * from message")
+        //     ){
+        //         while (myResultSet.next()) {
+        //             System.out.println(myResultSet.getString("author"));
+        //         }
             
-        } catch (Exception e) {
-        }
+        // } catch (Exception e) {
+        // }
+
+        int option = 0;
+
+        do {
+            System.out.println("--------------------");
+            System.out.println("Message app");
+            System.out.println("1. Create a message");
+            System.out.println("2. Read messages");
+            System.out.println("3. Edit message");
+            System.out.println("4. Delete message");
+            System.out.println("5. Exit");
+
+            option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    messageService.createMessage();
+                    break;
+                case 2:
+                    MessageDAO messageDAO = new MessageDAO();
+
+                    messageDAO.readMessage().forEach(System.out::println);
+                break;
+                default:
+                    throw new AssertionError();
+            }
+        } while (option != 5);
+
+        
 
     }
 }

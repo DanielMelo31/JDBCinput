@@ -11,24 +11,22 @@ public class DBConnector {
     private static String dbUrl;
     private static String dbUser;
     private static String dbPassword;
-    Connection connection = null;
+    private static Connection myConnection;
 
-    public Connection getConnection() throws IOException, SQLException {
+    public static Connection getInstance() throws IOException, SQLException {
         Properties properties = new Properties();
         FileInputStream fiStream = new FileInputStream("message_app\\config.properties");
         properties.load(fiStream);
 
         try{  
-            connection = DriverManager.getConnection(
+            myConnection = DriverManager.getConnection(
             properties.getProperty("dbUrl"), properties.getProperty("dbUser"), properties.getProperty("dbPassword"));
-            if (connection != null) {
-                System.out.println("Connection has succeded");
-            }
+            
      
         } catch (Exception e){
             System.out.println(e);
             System.out.println("Error in connection");
         }
-        return connection;
+        return myConnection;
     }
 }
